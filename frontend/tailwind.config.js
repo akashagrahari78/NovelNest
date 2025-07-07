@@ -7,6 +7,7 @@ module.exports = {
     extend: {
        fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
+         bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
       },
     },
   },

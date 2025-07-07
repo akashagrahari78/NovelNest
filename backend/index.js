@@ -1,11 +1,30 @@
 const express = require("express");
+const cors = require("cors")
+const connectDb = require("./config/mongodb.js")
+const userRouter = require("./routes/userRoute.js")
+require("dotenv").config();
+
+
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+connectDb().catch(err => {
+  console.error("MongoDB connection error:", err);
+  process.exit(1);
+});
+
+
 // Middleware
-app.use(express.json()); // To parse JSON body
+app.use(express.json());
+app.use(cors());
 
 // Routes
+app.use("/api/user", userRouter)
+
+
+
 app.get("/", (req, res) => {
   res.send("API is running...");
 });

@@ -16,8 +16,8 @@ const Navbar = () => {
         </div>
 
         {/* ----------- navigation links--------- */}
-        <div className="hidden md:flex space-x-6 text-base font- font-quicksand text-gray-300">
-          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">Reviews</a>
+        <div className="hidden md:flex space-x-6 text-sm text-gray-300">
+          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200 font-bricolage">Reviews</a>
           <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">Add Review</a>
           <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">About</a>
           <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">Contact</a>
@@ -26,7 +26,7 @@ const Navbar = () => {
         
         <div>
           <Link to= "/login">
-          <button className="bg-white text-black font-semibold px-4 py-1.5 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-gray-200 transition">
+          <button className="bg-white text-black font-semibold px-4 py-1.5 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-gray-200 transition ">
             Get Started
           </button>
           </Link>
