@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,4 +10,13 @@
 body{
    background-color: black;
    color: white;
+}
+
+/* Add to your global CSS */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

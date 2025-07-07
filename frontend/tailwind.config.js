@@ -8,6 +8,7 @@ module.exports = {
        fontFamily: {
         quicksand: ['Quicksand', 'sans-serif'],
          bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
+         merriweather: ['Merriweather', 'serif'],
       },
     },
   },
