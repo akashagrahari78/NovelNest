@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { userReviews } from "../assets/assets.js";
 export const userContext = createContext();
 
 
@@ -12,7 +12,8 @@ export const UserContextProvider = (props) => {
 
     const value = {
     navigate,
-    token, setToken
+    token, setToken,
+    userReviews
   };
 
   return (

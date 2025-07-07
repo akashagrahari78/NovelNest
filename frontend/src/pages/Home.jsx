@@ -1,13 +1,14 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
+import Reviews from "../components/Reviews";
 
 const Home = () => {
   return (
-    <div>
+    <div className="p-4"> {/* Add padding-top to account for fixed navbar */}
       <Navbar />
-      {/* <div className="font-bricolage">Home</div> */}
-      <Hero/>
+      <Hero />
+      <Reviews />
     </div>
   );
 };

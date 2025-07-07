@@ -17,7 +17,7 @@ const Hero = () => {
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 text-center">
       <div className="max-w-4xl w-full mx-auto">
         {/* Header */}
-        <h1 className="text-5xl md:text-7xl font-bold font-bricolage mb-4">
+        <h1 className="text-5xl md:text-6xl font-bold font-merriweather mt-40 mb-8">
           JUDGE BOOKS LIKE A PRO
         </h1>
         
@@ -50,7 +50,7 @@ const Hero = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search books, authors, or reviews..."
-              className="w-full px-6 py-4 text-lg rounded-full bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full px-6 py-4 mb-4 text-lg rounded-full bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white"
             />
             <button 
               type="submit"
@@ -73,10 +73,6 @@ const Hero = () => {
           </button>
         </div>
 
-        {/* Stats */}
-        {/* <p className="text-gray-400 text-sm md:text-base">
-          12,342+ books dissected (and counting)
-        </p> */}
       </div>
     </div>
   )

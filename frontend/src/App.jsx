@@ -10,12 +10,13 @@ import Navbar from './components/Navbar'
 import Footer from "./components/Footer"
 import SignUp from './pages/SignUp'
 import { ToastContainer, toast } from 'react-toastify';
+import Test from './components/Test'
 
 
 const App = () => {
   return (
- <div  >
-  
+ <div>
+
   <ToastContainer/>
    <Routes>
     <Route path='/' element = {<Home/>} />
@@ -24,9 +25,10 @@ const App = () => {
     <Route path='/login' element = {<Login/>} />
     <Route path='signup' element = {<SignUp/>} />
     <Route path='/profile' element = {<Profile/>} />
+    <Route path='/test' element = {<Test/>} />
    </Routes>
-
    <Footer/>
+   
  </div>
 
   )

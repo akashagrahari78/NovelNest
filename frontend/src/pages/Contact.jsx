@@ -1,17 +1,16 @@
-import React from 'react'
+import React from "react";
 
 const Contact = () => {
   return (
-    <div>
-        <div className="min-h-screen flex items-center justify-center bg-black">
-  <div className="w-11/12 max-w-4xl rounded-2xl px-6 py-8 bg-[#111111]/80 border border-gray-800 shadow-[0_0_40px_rgba(255,255,255,0.08)] backdrop-blur-md text-white">
-    <h1 className="text-3xl font-bold">Glowing Container</h1>
-    <p className="text-gray-300 mt-2">This container has a soft glow around it.</p>
+   <div className="relative w-7/12 p-[0.8px] rounded-xl bg-gradient-to-r from-green-400 via-yellow-500 to-red-500 animate-gradient-border bg-[length:200%_200%]">
+  <div className="rounded-xl bg-black p-6">
+    <h1 className="text-white text-xl font-bold">Flick.AI</h1>
+    <p className="text-sm text-white mt-2">An AI-powered tool...</p>
   </div>
 </div>
-</div>
-  )
-}
+
+  );
+};
 // quickSand sansSerif
 
-export default Contact
+export default Contact;

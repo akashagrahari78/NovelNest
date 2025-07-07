@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div className="flex justify-center mt-6">
+    <div className="fixed z-50 w-full flex justify-center mt-6">
       <div className="w-11/12 max-w-4xl px-6 py-3 flex items-center justify-between rounded-2xl bg-[#111111]/80  border border-gray-800 shadow-[0_0_40px_rgba(255,255,255,0.08)] backdrop-blur-lg">
 
         {/* logo icon*/}
@@ -17,10 +17,14 @@ const Navbar = () => {
 
         {/* ----------- navigation links--------- */}
         <div className="hidden md:flex space-x-6 text-sm text-gray-300">
-          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200 font-bricolage">Reviews</a>
-          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">Add Review</a>
+          <Link>
+          <div className="hover:text-white hover:scale-105  transition-transform duration-200 font-bricolage">Reviews</div>
+          </Link>
+          <a className="hover:text-white hover:scale-105  transition-transform duration-200">Add Review</a>
           <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">About</a>
-          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">Contact</a>
+          <Link to={"/contact"}>
+          <div className="hover:text-white hover:scale-105  transition-transform duration-200">Contact</div>
+          </Link>
         </div>
 
         
