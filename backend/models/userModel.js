@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema(
     } ,
     {
         minimize: false, 
-        timeStamps: true
+        timestamps: true
     },)
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("User", userSchema);

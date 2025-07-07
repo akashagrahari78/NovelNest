@@ -18,16 +18,20 @@ connectDb().catch(err => {
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true
+}));
 
 // Routes
 app.use("/api/user", userRouter)
 
 
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("API is running...");
+// });
 
 // Start the server
 app.listen(PORT, () => {

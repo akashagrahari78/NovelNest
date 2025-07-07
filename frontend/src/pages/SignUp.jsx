@@ -1,15 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { userContext } from "../context/userContext";
+import {toast} from 'react-toastify'
 
 const SignUp = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setToken, navigate} = useContext(userContext)
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
+const onSubmitHandler = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      `http://localhost:3000/api/user/register`,
+      { name, email, password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+     
+    console.log(response.data);
+       if(response.data.success){
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      toast.success("Registration successful!");
+      setTimeout(()=> navigate('/login'), 1000)
+    } else {
+      toast.error(response.data.message );
+    }
+  } catch (error) {
+    console.log("Full error:", error);
     
-  };
+    if (error.response) {
+      // Server responded with error status
+      const errorMessage = error.response.data?.message || "Registration failed";
+      toast.error(errorMessage);  // This will show "User already exists"
+    } else if (error.request) {
+      // Request was made but no response
+      toast.error("No response from server");
+    } else {
+      // Other errors
+      toast.error("Registration error: " + error.message);
+    }
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black px-4">
@@ -72,7 +110,10 @@ const SignUp = () => {
         {/* Link to Login */}
         <p className="text-sm text-center text-gray-400 mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-white underline hover:text-gray-300">
+          <Link
+            to="/login"
+            className="text-white underline hover:text-gray-300"
+          >
             Login
           </Link>
         </p>

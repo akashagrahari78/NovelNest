@@ -1,14 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { toast } from 'react-toastify';
+import { userContext } from '../context/userContext';
 
 const Login = () => {
+
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {backendUrl, token, setToken, navigate} = useContext(userContext);
 
-  const onSubmitHandler = async (e) => {
+    const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // TODO: Handle login logic
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/user/login`, 
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      
+      if(response.data.success){
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        toast.success("Login successful! Redirecting...");
+        // Redirect after 1.5 seconds
+        setTimeout(() => navigate('/'), 1500);
+      } else {
+         toast.error(response.data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+       toast.error(
+        error.response?.data?.message || 
+        error.message || 
+        "Login failed. Please try again."
+      );
+    }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black px-4">

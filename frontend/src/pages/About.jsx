@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { userContext } from '../context/userContext'
 
 const About = () => {
+
+  const {token} = useContext(userContext)
+
   return (
-    <div>About</div>
+    <div> About : {token} </div>
   )
 }
 
