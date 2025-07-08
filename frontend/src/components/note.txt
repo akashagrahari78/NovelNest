@@ -18,14 +18,14 @@ Dual buttons:
 "Browse Top Books" (primary)
 "Write First Review" (secondary)
 
-5.Footer
+5.Footer --done--
 
 
 ----------------------CONTACT---------------------
 --done--
 
 ----------------------ABOUT-----------------------
-
+--done--
 
 ---------------------Reviews----------------------
 
