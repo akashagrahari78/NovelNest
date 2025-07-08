@@ -18,19 +18,26 @@ const Navbar = () => {
         {/* ----------- navigation links--------- */}
         <div className="hidden md:flex space-x-6 text-sm text-gray-300">
           <Link>
-          <div className="hover:text-white hover:scale-105  transition-transform duration-200 font-bricolage">Reviews</div>
+          <div className="hover:text-yellow-400 hover:scale-105  transition-transform duration-200 font-bricolage">Reviews</div>
           </Link>
-          <a className="hover:text-white hover:scale-105  transition-transform duration-200">Add Review</a>
-          <a href="#" className="hover:text-white hover:scale-105  transition-transform duration-200">About</a>
+
+          <Link>
+          <div className="hover:text-yellow-400 hover:scale-105  transition-transform duration-200">Add Review</div>
+          </Link>
+
+          <Link to={'/about'}>
+          <div className="hover:text-yellow-400 hover:scale-105  transition-transform duration-200">About</div>
+          </Link>
+
           <Link to={"/contact"}>
-          <div className="hover:text-white hover:scale-105  transition-transform duration-200">Contact</div>
+          <div className="hover:text-yellow-400 hover:scale-105  transition-transform duration-200">Contact</div>
           </Link>
         </div>
 
         
         <div>
           <Link to= "/login">
-          <button className="bg-white text-black font-semibold px-4 py-1.5 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-gray-200 transition ">
+          <button className="bg-white text-black font-semibold px-4 py-1.5 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition ">
             Get Started
           </button>
           </Link>

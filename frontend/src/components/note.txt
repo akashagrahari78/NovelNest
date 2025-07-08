@@ -1,2 +1,28 @@
-1. see all heated discussion -> /reviews
 
+----------------------HERO------------------------
+
+1. see all heated discussion -> /reviews
+2. Animated stats bar:
+"12,342 Books Reviewed"
+"8,492 Active Members"
+Recent member join ticker
+
+3.User Testimonials
+Rotating carousel of:
+"How NovelNest changed my reading habits"
+Video/text testimonials
+
+4 .Final CTA Section
+"Ready to share your unfiltered take?"
+Dual buttons:
+"Browse Top Books" (primary)
+"Write First Review" (secondary)
+
+5.Footer
+
+
+----------------------CONTACT---------------------
+
+
+
+----------------------ABOUT-----------------------
