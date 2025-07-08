@@ -5,16 +5,18 @@ import Reviews from "../components/Reviews";
 import UserTestimonial from "../components/UserTestimonal";
 import StatsBar from "../components/StatsBar";
 import Cta from "../components/Cta";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div className="p-4"> {/* Add padding-top to account for fixed navbar */}
+    <div className="p-4">  
       <Hero />
       <Reviews />
       <UserTestimonial/>
       {/* <HeatedDiscussionsButton/> */}
       <StatsBar/>
       <Cta/>
+      <Footer/>
     </div>
   );
 };

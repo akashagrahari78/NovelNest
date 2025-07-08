@@ -12,7 +12,7 @@ Rotating carousel of:
 "How NovelNest changed my reading habits"
 Video/text testimonials
 
-4 .Final CTA Section
+4 .Final CTA Section --done--
 "Ready to share your unfiltered take?"
 Dual buttons:
 "Browse Top Books" (primary)
@@ -22,7 +22,12 @@ Dual buttons:
 
 
 ----------------------CONTACT---------------------
-
-
+--done--
 
 ----------------------ABOUT-----------------------
+
+
+---------------------Reviews----------------------
+
+
+---------------------Add-Review page--------------

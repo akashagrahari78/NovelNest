@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 
 const Cta = () => {
   return (
-    <div className="bg-black py-20 px-4 border-t border-gray-800">
+    <div>
+
+   
+         {/* <hr className="h-[2px] w-24 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent border-0" /> */}
+    <div className="bg-black py-20 px-4 border-gray-800">
       <div className="max-w-4xl mx-auto text-center">
         {/* Headline */}
         <motion.h2
@@ -47,6 +51,7 @@ const Cta = () => {
         </div>
       </div>
     </div>
+      </div>
   );
 };
 
