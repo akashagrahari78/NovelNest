@@ -1,13 +1,13 @@
 
 ----------------------HERO------------------------
 
-1. see all heated discussion -> /reviews
-2. Animated stats bar:
+1. see all heated discussion -> /reviews  --done--
+2. Animated stats bar: --done--
 "12,342 Books Reviewed"
 "8,492 Active Members"
 Recent member join ticker
 
-3.User Testimonials
+3.User Testimonials  --done--
 Rotating carousel of:
 "How NovelNest changed my reading habits"
 Video/text testimonials

@@ -11,24 +11,32 @@ import Footer from "./components/Footer"
 import SignUp from './pages/SignUp'
 import { ToastContainer, toast } from 'react-toastify';
 import Test from './components/Test'
+import MainLayout from './pages/MainLayout'
+import ReviewsPage from './pages/ReviewsPage'
+import AddReviewPage from './pages/AddReviewPage'
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 const App = () => {
   return (
- <div>
-
+ <div  >
+  
   <ToastContainer/>
    <Routes>
-    <Route path='/' element = {<Home/>} />
-    <Route path='/about' element = {<About/>} />
-    <Route path='/contact' element = {<Contact/>} />
+    <Route path='/' element = {<MainLayout> <Home/> </MainLayout>  } />
+    <Route path='/about' element = {<MainLayout> <About/> </MainLayout>  } />
+    <Route path='/reviews' element = {<MainLayout>  <ReviewsPage/> </MainLayout> } />
+    <Route path='/add-review' element = {<MainLayout>  <AddReviewPage/> </MainLayout> } />
+    <Route path='/contact' element = {<MainLayout>  <Contact/> </MainLayout> } />
     <Route path='/login' element = {<Login/>} />
     <Route path='signup' element = {<SignUp/>} />
     <Route path='/profile' element = {<Profile/>} />
     <Route path='/test' element = {<Test/>} />
    </Routes>
+
    <Footer/>
-   
  </div>
 
   )

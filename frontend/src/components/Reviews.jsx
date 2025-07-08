@@ -16,9 +16,9 @@ const Reviews = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-bold text-white font-merriweather mb-2"
+            className="text-4xl md:text-6xl font-bold text-white font-merriweather mb-2"
           >
-            RAW OPINIONS
+            Raw Opinions
           </motion.h2>
           <div className='mt-5'>
           <motion.p
