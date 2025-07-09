@@ -6,8 +6,6 @@ import About from "./pages/About"
 import Login from "./pages/Login"
 import Contact from "./pages/Contact"
 import Profile from './pages/Profile'
-import Navbar from './components/Navbar'
-import Footer from "./components/Footer"
 import SignUp from './pages/SignUp'
 import { ToastContainer, toast } from 'react-toastify';
 import Test from './components/Test'

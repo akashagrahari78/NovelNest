@@ -1,8 +1,11 @@
 import React from 'react'
+import AddReviewComponent from '../components/AddReviewComponent'
 
 const AddReviewPage = () => {
   return (
-    <div>AddReviewPage</div>
+    <div>
+      <AddReviewComponent/>
+    </div>
   )
 }
 
