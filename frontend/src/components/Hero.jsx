@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaSearch } from "react-icons/fa";
 import "../index.css"
 
 const Hero = () => {
@@ -54,20 +55,19 @@ const Hero = () => {
             />
             <button 
               type="submit"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white text-black p-2 rounded-full hover:bg-gray-200 transition"
+              className="absolute right-3 top-8  transform -translate-y-1/2 bg-white text-black p-2 rounded-full hover:bg-gray-200 transition"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <FaSearch className="h-6 w-6" />
             </button>
           </div>
         </form>
+
 
         {/* Primary CTA  */}
         <div className="flex justify-center mb-8">
           <button 
             onClick={() => navigate('/trending')}  
-            className="px-8 py-3 bg-white text-black font-bold rounded-full font-merriweather hover:bg-gray-200 transition-colors duration-300 text-lg"
+            className="px-8 py-3 bg-white text-black font-bold rounded-full font-merriweather shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition "
           >
             Explore  Curated  Picks
           </button>

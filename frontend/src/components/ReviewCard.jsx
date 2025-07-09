@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
+import { FiBookOpen } from "react-icons/fi"; 
+import { Link } from "react-router-dom";
 
-const ReviewCard = ({ username, rating, date, reviewText, helpfulCount }) => {
-  // Convert rating to stars (e.g., 5 → ★★★★★)
+const ReviewCard = ({ 
+  username, 
+  rating, 
+  date, 
+  reviewText, 
+  helpfulCount,
+  bookId 
+}) => {
   const renderStars = () => {
     return "★".repeat(rating) + "☆".repeat(5 - rating);
   };
@@ -11,29 +19,47 @@ const ReviewCard = ({ username, rating, date, reviewText, helpfulCount }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="border-b border-gray-200 py-4 last:border-0"
+      className="border-b border-gray-700 py-6 last:border-0 bg-gray-900/50 p-4 rounded-lg"
     >
+      {/* User & Rating */}
       <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-          <span className="text-xs font-medium text-gray-600">
+        <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
+          <span className="text-xs font-medium text-gray-300">
             {username.charAt(0).toUpperCase()}
           </span>
         </div>
-        <h4 className="font-medium text-gray-900">{username}</h4>
+        <h4 className="font-medium text-white">{username}</h4>
       </div>
 
       <div className="mt-1 flex items-center gap-2">
         <span className="text-yellow-500">{renderStars()}</span>
-        <span className="text-xs text-gray-500">{date}</span>
+        <span className="text-xs text-gray-400">{date}</span>
       </div>
 
-      <p className="mt-2 text-gray-700">{reviewText}</p>
+      {/* Review Text  */}
+      <p className="mt-3 text-gray-300 line-clamp-3">
+        {reviewText}
+      </p>
 
-      <div className="mt-2 flex items-center gap-1">
-        <button className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700">
+      {/* Like Button */}
+      <div className="mt-4 flex justify-between items-center">
+        <button className="flex items-center gap-1 text-xs text-gray-400 hover:text-yellow-400 transition">
           <span>👍</span>
           <span>{helpfulCount} Helpful</span>
         </button>
+
+        {/* Full Review Button */}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate(`/book/${bookId}`)}
+          className="flex items-center gap-1 text-sm text-yellow-500 hover:text-yellow-400 transition"
+        >
+          <FiBookOpen className="text-xs" />
+          <Link to={'/book/:bookId'}>
+          Full Review
+          </Link>
+        </motion.button>
       </div>
     </motion.div>
   );

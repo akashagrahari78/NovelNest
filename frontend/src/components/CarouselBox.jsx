@@ -47,7 +47,7 @@ const CarouselBox = ({ bookAuthor, bookTitle, userReview, rating }) => {
           <span className="text-sm text-gray-500 truncate max-w-[120px]">
             @{bookAuthor.split(" ").join("")}
           </span>
-          <Link>
+          <Link  to={`/book/:bookId`} >
             <button className="bg-white text-black hover:bg-gray-200 text-sm px-4 py-2 rounded-xl font-medium transition-colors duration-200">
               Full Review →
             </button>

@@ -28,6 +28,9 @@ Dual buttons:
 --done--
 
 ---------------------Reviews----------------------
-
+--done--
 
 ---------------------Add-Review page--------------
+
+--> button--< 
+1.explore curated picks 

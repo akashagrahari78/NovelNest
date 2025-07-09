@@ -2,6 +2,7 @@ import {motion} from 'framer-motion'
 import { useContext } from 'react';
 import {userContext} from "../context/userContext.jsx"
 import CarouselBox from '../components/CarouselBox.jsx'
+import { Link } from 'react-router-dom';
 
 const Reviews = () => {
   const { userReviews } = useContext(userContext);
@@ -35,6 +36,7 @@ const Reviews = () => {
 
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        
         {userReviews.map((item, index) => (
           <motion.div
             key={item._id}

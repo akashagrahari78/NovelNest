@@ -42,8 +42,8 @@ const Cta = () => {
             </button>
           </Link>
 
-          {/* Secondary Button */}
-          <Link to="/reviews">
+          
+          <Link to="/add-review">
             <button className="bg-white  text-black font-semibold px-5 py-2 rounded-xl font-merriweather shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition ">
               Write First Review
             </button>

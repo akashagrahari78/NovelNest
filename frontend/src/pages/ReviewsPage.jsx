@@ -11,6 +11,7 @@ const ReviewsPage = () => {
       date: "2 days ago",
       reviewText: "This book was amazing! The plot twists kept me hooked.",
       helpfulCount: 12,
+      bookId: 9
     },{
       id: 2,
       username: "BookLover42",
@@ -18,6 +19,7 @@ const ReviewsPage = () => {
       date: "1 week ago",
       reviewText: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
+      bookId: 9
     },
     {
       id: 2,
@@ -26,6 +28,8 @@ const ReviewsPage = () => {
       date: "1 week ago",
       reviewText: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
+      bookId: 9
+
     },
     {
       id: 2,
@@ -34,6 +38,7 @@ const ReviewsPage = () => {
       date: "1 week ago",
       reviewText: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
+      bookId: 9
     },
     {
       id: 2,
@@ -42,6 +47,7 @@ const ReviewsPage = () => {
       date: "1 week ago",
       reviewText: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
+      bookId: 9
     },
      
   ];
