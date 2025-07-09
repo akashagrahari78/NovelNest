@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import { FiBookOpen } from "react-icons/fi"; 
-import { Link } from "react-router-dom";
+import { Link , useParams} from "react-router-dom";
+ 
 
-const ReviewCard = ({ 
-  username, 
-  rating, 
-  date, 
-  reviewText, 
-  helpfulCount,
-  bookId 
-}) => {
-  const renderStars = () => {
+const ReviewCard = ({ bookId,  bookAuthor, bookTitle, userReview, rating, date}) => {
+    
+   const renderStars = () => {
     return "★".repeat(rating) + "☆".repeat(5 - rating);
   };
 
@@ -25,10 +21,12 @@ const ReviewCard = ({
       <div className="flex items-center gap-2">
         <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
           <span className="text-xs font-medium text-gray-300">
-            {username.charAt(0).toUpperCase()}
+            {/* {username.charAt(0).toUpperCase()} */}
+            A
           </span>
         </div>
-        <h4 className="font-medium text-white">{username}</h4>
+        {/* <h4 className="font-medium text-white">{username}</h4> */}
+        <h4 className="font-medium text-white">Alpha</h4>
       </div>
 
       <div className="mt-1 flex items-center gap-2">
@@ -38,25 +36,25 @@ const ReviewCard = ({
 
       {/* Review Text  */}
       <p className="mt-3 text-gray-300 line-clamp-3">
-        {reviewText}
+        {userReview}
       </p>
 
       {/* Like Button */}
       <div className="mt-4 flex justify-between items-center">
         <button className="flex items-center gap-1 text-xs text-gray-400 hover:text-yellow-400 transition">
           <span>👍</span>
-          <span>{helpfulCount} Helpful</span>
+          {/* <span>{helpfulCount} Helpful</span> */}
+          <span>1 Helpful</span>
         </button>
 
         {/* Full Review Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => navigate(`/book/${bookId}`)}
           className="flex items-center gap-1 text-sm text-yellow-500 hover:text-yellow-400 transition"
         >
           <FiBookOpen className="text-xs" />
-          <Link to={'/book/:bookId'}>
+          <Link to={`/book/${bookId}`}>
           Full Review
           </Link>
         </motion.button>

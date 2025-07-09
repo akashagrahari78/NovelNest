@@ -18,19 +18,11 @@ Dual buttons:
 "Browse Top Books" (primary)
 "Write First Review" (secondary)
 
-5.Footer --done--
-
-
-----------------------CONTACT---------------------
---done--
-
-----------------------ABOUT-----------------------
---done--
-
----------------------Reviews----------------------
---done--
-
 ---------------------Add-Review page--------------
 
 --> button--< 
-1.explore curated picks 
+1.explore curated picks  
+
+--Carousel Box---book--- (bookId, bookAuthor, bookTitle, userReview, rating, date, userName)
+
+--ReviewPage-> ReviewCard---(bookId, userName, rating, date, userReview, likes)

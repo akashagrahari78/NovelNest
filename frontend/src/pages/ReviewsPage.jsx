@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import ReviewCard from "../components/ReviewCard.jsx"; 
+import { useContext } from "react";
+import { userContext } from "../context/userContext.jsx";
 
 const ReviewsPage = () => {
   
@@ -52,6 +54,9 @@ const ReviewsPage = () => {
      
   ];
 
+      const {books} = useContext(userContext);
+
+
   return (
     <div className="max-w-2xl mx-auto p-4 mt-28">
       {/* Box-like container with heading and filters */}
@@ -80,8 +85,15 @@ const ReviewsPage = () => {
 
       {/* Reviews list */}
       <div className="space-y-4">
-        {reviews.map((review) => (
-          <ReviewCard key={review.id} {...review} />
+        {books.map((item, index) => (
+          <ReviewCard 
+              key={index}
+              bookId = {item.id}
+              bookAuthor={item.bookauthor}
+              bookTitle={item.bookname}
+              userReview={item.review}
+              rating={item.rating}
+              date={item.date}   />
         ))}
       </div>
     </div>

@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { userContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 
-const CarouselBox = ({ bookAuthor, bookTitle, userReview, rating }) => {
+const CarouselBox = ({bookId, bookAuthor, bookTitle, userReview, rating, date }) => {
   return (
     <motion.div
       whileHover={{
@@ -16,24 +15,31 @@ const CarouselBox = ({ bookAuthor, bookTitle, userReview, rating }) => {
       <div className="h-full rounded-xl bg-gray-900 p-6 flex flex-col">
         {/* Book Title */}
         <h2 className="text-xl font-bold text-white mb-2 font-bricolage line-clamp-1">
-           {bookTitle}
+          {bookTitle}
         </h2>
 
         {/* Author */}
         <p className="text-gray-300 mb-1 line-clamp-1">
           <span className="font-medium font-bricolage text-gray-400">Author:</span>{" "}
-          <span className="font-bricolage">
-          {bookAuthor}
-          </span>
+          <span className="font-bricolage">{bookAuthor}</span>
         </p>
 
-        {/* Rating */}
-        <div className="mb-1">
-          <span className="font-medium text-gray-400 font-bricolage">Rating:</span>
-          <span className="text-yellow-400 ml-1">
-            {"★".repeat(rating)}
-            {"☆".repeat(5 - rating)}
-          </span>
+        {/* Rating & Date */}
+        <div className="flex items-center gap-4 mb-1">
+          <div>
+            <span className="font-medium text-gray-400 font-bricolage">Rating:</span>
+            <span className="text-yellow-400 ml-1">
+              {"★".repeat(rating)}
+              {"☆".repeat(5 - rating)}
+            </span>
+          </div>
+          <div className="text-sm text-gray-500">
+            {new Date(date).toLocaleDateString('en-US', { 
+              year: 'numeric', 
+              month: 'short', 
+              day: 'numeric' 
+            })}
+          </div>
         </div>
 
         {/* Review Excerpt */}
@@ -45,9 +51,10 @@ const CarouselBox = ({ bookAuthor, bookTitle, userReview, rating }) => {
         {/* Footer */}
         <div className="flex items-center justify-between border-t border-gray-800 pt-4">
           <span className="text-sm text-gray-500 truncate max-w-[120px]">
-            @{bookAuthor.split(" ").join("")}
+            {/* @{bookAuthor.split(" ").join("")} */}
+            @username
           </span>
-          <Link  to={`/book/:bookId`} >
+          <Link to={`/book/${bookId}`}>
             <button className="bg-white text-black hover:bg-gray-200 text-sm px-4 py-2 rounded-xl font-medium transition-colors duration-200">
               Full Review →
             </button>
@@ -57,4 +64,6 @@ const CarouselBox = ({ bookAuthor, bookTitle, userReview, rating }) => {
     </motion.div>
   );
 };
+
 export default CarouselBox;
+ 
