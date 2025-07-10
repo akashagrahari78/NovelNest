@@ -1,13 +1,33 @@
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import { FiBookOpen } from "react-icons/fi"; 
-import { Link , useParams} from "react-router-dom";
- 
+import { FiBookOpen, FiUser, FiCalendar, FiStar, FiThumbsUp } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const ReviewCard = ({ bookId,  bookAuthor, bookTitle, userReview, rating, date}) => {
-    
-   const renderStars = () => {
+const ReviewCard = ({ 
+  bookId,
+  bookTitle,
+  bookAuthor,
+  rating,
+  date,
+  userReview,
+  reviewedBy,
+  initialLikes = 0 
+}) => {
+  const [likes, setLikes] = useState(initialLikes);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const renderStars = () => {
     return "★".repeat(rating) + "☆".repeat(5 - rating);
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
+
+  const handleLike = () => {
+    setLikes(isLiked ? likes - 1 : likes + 1);
+    setIsLiked(!isLiked);
   };
 
   return (
@@ -15,49 +35,79 @@ const ReviewCard = ({ bookId,  bookAuthor, bookTitle, userReview, rating, date})
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="border-b border-gray-700 py-6 last:border-0 bg-gray-900/50 p-4 rounded-lg"
+      className="border border-gray-700 bg-gray-900/50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
     >
-      {/* User & Rating */}
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
-          <span className="text-xs font-medium text-gray-300">
-            {/* {username.charAt(0).toUpperCase()} */}
-            A
-          </span>
+      {/* Book Info Header */}
+      <div className="mb-4">
+        <h3 className="text-xl font-bold text-white font-merriweather">
+          {bookTitle}
+        </h3>
+        <p className="text-gray-400 flex items-center gap-1 mt-1">
+          <FiUser className="text-sm" />
+          <span className="font-medium">{bookAuthor}</span>
+        </p>
+      </div>
+
+      {/* Rating and Date */}
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-1 text-yellow-400">
+          <FiStar />
+          <span>{renderStars()}</span>
+          <span className="text-sm ml-1">({rating}.0)</span>
         </div>
-        {/* <h4 className="font-medium text-white">{username}</h4> */}
-        <h4 className="font-medium text-white">Alpha</h4>
+        <div className="flex items-center gap-1 text-gray-400 text-sm">
+          <FiCalendar />
+          <span>{formatDate(date)}</span>
+        </div>
       </div>
 
-      <div className="mt-1 flex items-center gap-2">
-        <span className="text-yellow-500">{renderStars()}</span>
-        <span className="text-xs text-gray-400">{date}</span>
+      {/* Review Content (Truncated to 2 lines) */}
+      <div className="mb-4">
+        <p className="text-gray-300 line-clamp-2">
+          {userReview}
+        </p>
       </div>
 
-      {/* Review Text  */}
-      <p className="mt-3 text-gray-300 line-clamp-3">
-        {userReview}
-      </p>
+      {/* Action Buttons */}
+      <div className="flex justify-between items-center pt-4 border-t border-gray-700">
+        <div className="flex items-center gap-4">
+          {/* Like Button */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={handleLike}
+            className={`flex items-center gap-1 text-sm ${isLiked ? 'text-blue-400' : 'text-gray-400'} hover:text-blue-300 transition-colors`}
+          >
+            <FiThumbsUp className={isLiked ? 'fill-current' : ''} />
+            <span>{likes} {likes === 1 ? 'Like' : 'Likes'}</span>
+          </motion.button>
 
-      {/* Like Button */}
-      <div className="mt-4 flex justify-between items-center">
-        <button className="flex items-center gap-1 text-xs text-gray-400 hover:text-yellow-400 transition">
-          <span>👍</span>
-          {/* <span>{helpfulCount} Helpful</span> */}
-          <span>1 Helpful</span>
-        </button>
+          {/* Reviewer Info */}
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
+              <span className="text-xs font-medium text-gray-300">
+                {reviewedBy?.charAt(0).toUpperCase() || 'U'}
+              </span>
+            </div>
+            <span className="text-sm text-gray-400">
+              {reviewedBy || 'Anonymous'}
+            </span>
+          </div>
+        </div>
 
         {/* Full Review Button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <Link 
+          to={`/book/${bookId}`}
           className="flex items-center gap-1 text-sm text-yellow-500 hover:text-yellow-400 transition"
         >
-          <FiBookOpen className="text-xs" />
-          <Link to={`/book/${bookId}`}>
-          Full Review
-          </Link>
-        </motion.button>
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center"
+          >
+            <FiBookOpen className="mr-1" />
+            Full Review
+          </motion.span>
+        </Link>
       </div>
     </motion.div>
   );

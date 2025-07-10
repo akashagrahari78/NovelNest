@@ -36,54 +36,6 @@ export const books = [
     "rating": 4.5,
     "date": "2023-08-05",
     "review": "A tragic story of love, wealth, and the American Dream."
-  },
-  {
-    "id": 5,
-    "bookname": "Moby Dick",
-    "bookauthor": "Herman Melville",
-    "rating": 4.3,
-    "date": "2023-09-10",
-    "review": "An epic tale of obsession and the sea."
-  },
-  {
-    "id": 6,
-    "bookname": "War and Peace",
-    "bookauthor": "Leo Tolstoy",
-    "rating": 4.4,
-    "date": "2023-10-12",
-    "review": "A vast and intricate novel about history and human experience."
-  },
-  {
-    "id": 7,
-    "bookname": "The Catcher in the Rye",
-    "bookauthor": "J.D. Salinger",
-    "rating": 4.2,
-    "date": "2023-11-18",
-    "review": "A coming-of-age story with deep emotional impact."
-  },
-  {
-    "id": 8,
-    "bookname": "The Hobbit",
-    "bookauthor": "J.R.R. Tolkien",
-    "rating": 4.7,
-    "date": "2023-12-22",
-    "review": "A fantastical adventure in Middle-earth."
-  },
-  {
-    "id": 9,
-    "bookname": "Fahrenheit 451",
-    "bookauthor": "Ray Bradbury",
-    "rating": 4.5,
-    "date": "2024-01-15",
-    "review": "A powerful critique of censorship and conformity."
-  },
-  {
-    "id": 10,
-    "bookname": "Jane Eyre",
-    "bookauthor": "Charlotte Brontë",
-    "rating": 4.6,
-    "date": "2024-02-20",
-    "review": "A passionate and gothic tale of love and independence."
   }
 ]
 

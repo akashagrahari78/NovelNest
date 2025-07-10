@@ -23,6 +23,13 @@ Dual buttons:
 --> button--< 
 1.explore curated picks  
 
+buttons -->>
+1. most Recent - date
+2. Highest Rated - starRating by userName
+3. most helpful - likes by the user
+
 --Carousel Box---book--- (bookId, bookAuthor, bookTitle, userReview, rating, date, userName)
 
 --ReviewPage-> ReviewCard---(bookId, userName, rating, date, userReview, likes)
+
+

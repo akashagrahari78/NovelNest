@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import MainLayout from './pages/MainLayout'
 import ReviewsPage from './pages/ReviewsPage'
 import AddReviewPage from './pages/AddReviewPage'
+import Test from './pages/Test'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,6 +34,7 @@ const App = () => {
     <Route path='/login' element = {<Login/>} />
     <Route path='signup' element = {<SignUp/>} />
     <Route path='/profile' element = {<Profile/>} />
+    <Route path='/test' element = {<Test/>} />
    </Routes>
 
    {/* <Footer/> */}
