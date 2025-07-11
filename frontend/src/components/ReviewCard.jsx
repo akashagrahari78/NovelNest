@@ -1,17 +1,23 @@
 import { motion } from "framer-motion";
-import { FiBookOpen, FiUser, FiCalendar, FiStar, FiThumbsUp } from "react-icons/fi";
+import {
+  FiBookOpen,
+  FiUser,
+  FiCalendar,
+  FiStar,
+  FiThumbsUp,
+} from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const ReviewCard = ({ 
-  bookId,
+const ReviewCard = ({
+  postId,
   bookTitle,
   bookAuthor,
+  userReview,
   rating,
   date,
-  userReview,
   reviewedBy,
-  initialLikes = 0 
+  initialLikes = 0,
 }) => {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
@@ -21,8 +27,8 @@ const ReviewCard = ({
   };
 
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString("en-US", options);
   };
 
   const handleLike = () => {
@@ -63,9 +69,7 @@ const ReviewCard = ({
 
       {/* Review Content (Truncated to 2 lines) */}
       <div className="mb-4">
-        <p className="text-gray-300 line-clamp-2">
-          {userReview}
-        </p>
+        <p className="text-gray-300 line-clamp-2">{userReview}</p>
       </div>
 
       {/* Action Buttons */}
@@ -75,28 +79,30 @@ const ReviewCard = ({
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={handleLike}
-            className={`flex items-center gap-1 text-sm ${isLiked ? 'text-blue-400' : 'text-gray-400'} hover:text-blue-300 transition-colors`}
+            className={`flex items-center gap-1 text-sm ${
+              isLiked ? "text-blue-400" : "text-gray-400"
+            } hover:text-blue-300 transition-colors`}
           >
-            <FiThumbsUp className={isLiked ? 'fill-current' : ''} />
-            <span>{likes} {likes === 1 ? 'Like' : 'Likes'}</span>
+            <FiThumbsUp className={isLiked ? "fill-current" : ""} />
+            <span>
+              {likes} {likes === 1 ? "Like" : "Likes"}
+            </span>
           </motion.button>
 
           {/* Reviewer Info */}
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center">
               <span className="text-xs font-medium text-gray-300">
-                {reviewedBy?.charAt(0).toUpperCase() || 'U'}
+                {reviewedBy?.name?.charAt(0).toUpperCase() || "U"}
               </span>
             </div>
-            <span className="text-sm text-gray-400">
-              {reviewedBy || 'Anonymous'}
-            </span>
+            <span className="text-sm text-gray-400">{reviewedBy.name}</span>
           </div>
         </div>
 
         {/* Full Review Button */}
-        <Link 
-          to={`/book/${bookId}`}
+        <Link
+          to={`/book/${postId}`}
           className="flex items-center gap-1 text-sm text-yellow-500 hover:text-yellow-400 transition"
         >
           <motion.span

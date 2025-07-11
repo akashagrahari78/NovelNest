@@ -1,6 +1,5 @@
-const postModel = require("../models/postModel.js")
-const userModel = require("../models/userModel.js")
-
+const postModel = require("../models/postModel.js");
+const userModel = require("../models/userModel.js");
 
 const handleUserReview = async (req, res) => {
   try {
@@ -10,7 +9,7 @@ const handleUserReview = async (req, res) => {
     if (!userId) {
       return res.status(401).json({ message: "User not authenticated" });
     }
-   const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId);
     const newPost = await postModel.create({
       bookTitle,
       bookAuthor,
@@ -23,11 +22,11 @@ const handleUserReview = async (req, res) => {
     user.posts.push(newPost._id);
     await user.save();
 
-    //  console.log(newPost);  
-    res.status(201).json({ 
-      success: true, 
-      data: newPost, 
-      message: "Review added successfully." 
+    //  console.log(newPost);
+    res.status(201).json({
+      success: true,
+      data: newPost,
+      message: "Review added successfully.",
     });
   } catch (error) {
     console.error(error);
@@ -35,4 +34,20 @@ const handleUserReview = async (req, res) => {
   }
 };
 
-module.exports = {handleUserReview}
+const handleGetAllPost = async (req, res) => {
+  try {
+const posts = await postModel
+  .find({})
+  .populate("reviewedBy", "name");
+
+// console.log("Posts:", JSON.stringify(posts, null, 2));
+
+    res.json({ success: true, posts });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+
+module.exports = { handleUserReview,handleGetAllPost};

@@ -3,6 +3,7 @@ const cors = require("cors")
 const connectDb = require("./config/mongodb.js")
 const userRouter = require("./routes/userRoute.js");
 const postRouter = require("./routes/postRoute.js");
+const allpostRouter = require("./routes/allPostRoute.js")
 require("dotenv").config();
 
 
@@ -28,6 +29,9 @@ app.use(cors({
 // Routes
 app.use("/api/user", userRouter)
 app.use("/api/user", postRouter)
+app.use("/api/post", allpostRouter)
+
+ 
 // app.get("/", (req, res) => {
 //   res.send("API is running...");
 // });

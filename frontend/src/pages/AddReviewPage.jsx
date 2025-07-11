@@ -6,8 +6,8 @@ import { userContext } from "../context/userContext";
 import { toast } from "react-toastify";
 
 
-
 const AddReviewPage = () => {
+  const { getAllPost} = useContext(userContext);
 
   const {token, setToken} = useContext(userContext);
   const [formData, setFormData] = useState({
@@ -38,7 +38,8 @@ const AddReviewPage = () => {
       "Content-Type": "application/json",
     },
   }
-);
+)
+await getAllPost();
 
       console.log(response.data);
 

@@ -3,56 +3,11 @@ import ReviewCard from "../components/ReviewCard.jsx";
 import { useContext } from "react";
 import { userContext } from "../context/userContext.jsx";
 
-const ReviewsPage = () => {
-  const reviews = [
-    {
-      id: 1,
-      username: "User123",
-      rating: 5,
-      date: "2 days ago",
-      userReview: "This book was amazing! The plot twists kept me hooked.",
-      helpfulCount: 12,
-      bookId: 9,
-    },
-    {
-      id: 2,
-      username: "BookLover42",
-      rating: 3,
-      date: "1 week ago",
-      userReview: "Good, but the middle part dragged a bit.",
-      helpfulCount: 5,
-      bookId: 9,
-    },
-    {
-      id: 2,
-      username: "BookLover42",
-      rating: 3,
-      date: "1 week ago",
-      userReview: "Good, but the middle part dragged a bit.",
-      helpfulCount: 5,
-      bookId: 9,
-    },
-    {
-      id: 2,
-      username: "BookLover42",
-      rating: 3,
-      date: "1 week ago",
-      userReview: "Good, but the middle part dragged a bit.",
-      helpfulCount: 5,
-      bookId: 9,
-    },
-    {
-      id: 2,
-      username: "BookLover42",
-      rating: 3,
-      date: "1 week ago",
-      userReview: "Good, but the middle part dragged a bit.",
-      helpfulCount: 5,
-      bookId: 9,
-    },
-  ];
 
-  const { books } = useContext(userContext);
+
+const ReviewsPage = () => {
+
+  const { books, allPost } = useContext(userContext);
 
   return (
     <div className="max-w-2xl mx-auto p-4 mt-28">
@@ -84,15 +39,16 @@ const ReviewsPage = () => {
 
       {/* Reviews list */}
       <div className="space-y-4">
-        {books.map((item, index) => (
+        {allPost.map((item, index) => (
           <ReviewCard
             key={index}
-            bookId={item.id}
+            postId={item._id}
             bookTitle={item.bookTitle}
-            bookAuthor={item.bookauthor}
-            userReview={item.review}
+            bookAuthor={item.bookAuthor}
+            userReview={item.userReview}
             rating={item.rating}
             date={item.date}  
+            reviewedBy ={item.reviewedBy}
           />
         ))}
       </div>
