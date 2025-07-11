@@ -41,7 +41,7 @@ const Book = () => {
 
         {/* Book Title */}
         <h1 className="text-3xl font-bold font-merriweather text-yellow-400">
-          {book.bookname}
+          {book.bookTitle}
         </h1>
 
         {/* Author */}

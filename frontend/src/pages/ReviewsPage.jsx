@@ -10,7 +10,7 @@ const ReviewsPage = () => {
       username: "User123",
       rating: 5,
       date: "2 days ago",
-      reviewText: "This book was amazing! The plot twists kept me hooked.",
+      userReview: "This book was amazing! The plot twists kept me hooked.",
       helpfulCount: 12,
       bookId: 9,
     },
@@ -19,7 +19,7 @@ const ReviewsPage = () => {
       username: "BookLover42",
       rating: 3,
       date: "1 week ago",
-      reviewText: "Good, but the middle part dragged a bit.",
+      userReview: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
       bookId: 9,
     },
@@ -28,7 +28,7 @@ const ReviewsPage = () => {
       username: "BookLover42",
       rating: 3,
       date: "1 week ago",
-      reviewText: "Good, but the middle part dragged a bit.",
+      userReview: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
       bookId: 9,
     },
@@ -37,7 +37,7 @@ const ReviewsPage = () => {
       username: "BookLover42",
       rating: 3,
       date: "1 week ago",
-      reviewText: "Good, but the middle part dragged a bit.",
+      userReview: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
       bookId: 9,
     },
@@ -46,7 +46,7 @@ const ReviewsPage = () => {
       username: "BookLover42",
       rating: 3,
       date: "1 week ago",
-      reviewText: "Good, but the middle part dragged a bit.",
+      userReview: "Good, but the middle part dragged a bit.",
       helpfulCount: 5,
       bookId: 9,
     },
@@ -88,7 +88,7 @@ const ReviewsPage = () => {
           <ReviewCard
             key={index}
             bookId={item.id}
-            bookTitle={item.bookname}
+            bookTitle={item.bookTitle}
             bookAuthor={item.bookauthor}
             userReview={item.review}
             rating={item.rating}

@@ -7,7 +7,7 @@ export const assets = {
 export const books = [
   {
     "id": 1,
-    "bookname": "To Kill a Mockingbird",
+    "bookTitle": "To Kill a Mockingbird",
     "bookauthor": "Harper Lee",
     "rating": 4.8,
     "date": "2023-05-10",
@@ -15,7 +15,7 @@ export const books = [
   },
   {
     "id": 2,
-    "bookname": "1984",
+    "bookTitle": "1984",
     "bookauthor": "George Orwell",
     "rating": 4.7,
     "date": "2023-06-15",
@@ -23,7 +23,7 @@ export const books = [
   },
   {
     "id": 3,
-    "bookname": "Pride and Prejudice",
+    "bookTitle": "Pride and Prejudice",
     "bookauthor": "Jane Austen",
     "rating": 4.6,
     "date": "2023-07-20",
@@ -31,7 +31,7 @@ export const books = [
   },
   {
     "id": 4,
-    "bookname": "The Great Gatsby",
+    "bookTitle": "The Great Gatsby",
     "bookauthor": "F. Scott Fitzgerald",
     "rating": 4.5,
     "date": "2023-08-05",

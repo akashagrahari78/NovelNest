@@ -5,10 +5,6 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 require("dotenv").config();
 
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "3d" });
-};
-
 //------------------------------------------login------------------
 const userLogin = async (req, res) => {
   try {
@@ -21,7 +17,13 @@ const userLogin = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      const token = createToken(user._id);
+      const token = jwt.sign(
+        {
+          userId: user._id.toString(), 
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "3d" }
+      );
       res.json({ success: true, token });
     } else {
       res.json({ success: false, message: "Email or password is incorrect" });
@@ -35,14 +37,16 @@ const userLogin = async (req, res) => {
 const userRegister = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log( name, email , password);
+    console.log(name, email, password);
     const emailNormalized = email.trim().toLowerCase();
-    
+
     // Check if user exists
     const exists = await userModel.findOne({ email: emailNormalized });
-    console.log(exists)
+    console.log(exists);
     if (exists) {
-      return res.status(400).json({ success: false, message: "User already exists" });
+      return res
+        .status(400)
+        .json({ success: false, message: "User already exists" });
     }
 
     // Validate email
@@ -71,13 +75,20 @@ const userRegister = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = createToken(newUser._id);
+    const token = jwt.sign(
+      {
+        userId: newUser._id.toString(), // Make sure this is a string
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "3d" }
+    );
     return res.status(201).json({ success: true, token });
-    
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ success: false, message: "Internal server error" });
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
   }
 };
 
-module.exports = { userLogin , userRegister};
+module.exports = { userLogin, userRegister };

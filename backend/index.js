@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors")
 const connectDb = require("./config/mongodb.js")
-const userRouter = require("./routes/userRoute.js")
+const userRouter = require("./routes/userRoute.js");
+const postRouter = require("./routes/postRoute.js");
 require("dotenv").config();
 
 
@@ -20,13 +21,13 @@ connectDb().catch(err => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'http://localhost:5175', 
   credentials: true
 }));
 
 // Routes
 app.use("/api/user", userRouter)
-
+app.use("/api/user", postRouter)
 // app.get("/", (req, res) => {
 //   res.send("API is running...");
 // });

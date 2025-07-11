@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
-  bookId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Book",           
-  },
   bookTitle: {
     type: String,
   },
@@ -14,7 +10,7 @@ const postSchema = mongoose.Schema({
   rating: {
     type: Number,
     min: 1,
-    max: 5
+    max: 5,
   },
   userReview: {
     type: String,
@@ -23,14 +19,16 @@ const postSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }],
-  createdAt: {
+  date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Post", postSchema);

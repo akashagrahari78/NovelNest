@@ -46,7 +46,7 @@ const Reviews = () => {
             <CarouselBox
               bookId = {item.id}
               bookAuthor={item.bookauthor}
-              bookTitle={item.bookname}
+              bookTitle={item.bookTitle}
               userReview={item.review}
               rating ={item.rating}
               date ={item.date}  
