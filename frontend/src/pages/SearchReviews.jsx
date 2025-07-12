@@ -1,21 +1,26 @@
-import { useSearchParams ,Link} from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { userContext } from "../context/userContext";
 import { motion } from "framer-motion";
-import ReviewCard from "../components/ReviewCard.jsx"; // Import your ReviewCard component
+import ReviewCard from "../components/ReviewCard.jsx";
 
 const SearchReviews = () => {
   const { token } = useContext(userContext);
   const [searchParams] = useSearchParams();
-  const title = searchParams.get("title");
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Get both title and author from search params
+  const title = searchParams.get("title");
+  const author = searchParams.get("author");
+  const searchBy = title ? "title" : "author";
+  const searchQuery = title || author;
+
   useEffect(() => {
     const fetchReviews = async () => {
-      if (!title) {
+      if (!searchQuery) {
         setLoading(false);
         return;
       }
@@ -23,12 +28,22 @@ const SearchReviews = () => {
       try {
         setLoading(true);
         setError(null);
+        
+        // query parameters based on search type
+        const params = {};
+        if (title) {
+          params.title = title;
+        } else if (author) {
+          params.author = author;
+        }
+
         const res = await axios.get(`http://localhost:3000/api/reviews`, {
-          params: { title },
+          params,
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        
         setReviews(res.data.reviews || []);
       } catch (err) {
         console.error("Failed to fetch reviews:", err);
@@ -40,13 +55,15 @@ const SearchReviews = () => {
     };
 
     fetchReviews();
-  }, [title, token]);
+  }, [searchQuery, title, author, token]);
 
   if (loading) {
     return (
       <div className="min-h-screen p-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8">Searching for "{title}"...</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">
+            Searching for {searchBy === "title" ? "title" : "author"} "{searchQuery}"...
+          </h2>
           <div className="space-y-6">
             {[...Array(3)].map((_, i) => (
               <motion.div
@@ -102,7 +119,11 @@ const SearchReviews = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-white mb-8"
         >
-          Reviews for "{title}"
+          {searchBy === "title" ? (
+            <>Reviews for "{title}"</>
+          ) : (
+            <>Reviews by author "{author}"</>
+          )}
         </motion.h2>
 
         {reviews.length === 0 ? (
@@ -111,7 +132,9 @@ const SearchReviews = () => {
             animate={{ opacity: 1 }}
             className="bg-gray-900/50 border border-gray-700 p-8 rounded-lg text-center"
           >
-            <p className="text-gray-400 text-lg">No reviews found for this book.</p>
+            <p className="text-gray-400 text-lg">
+              No reviews found {searchBy === "title" ? "for this book" : "by this author"}.
+            </p>
             <Link
               to="/"
               className="inline-block mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-500 rounded text-white transition"

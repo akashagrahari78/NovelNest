@@ -48,34 +48,49 @@ const handleGetAllPost = async (req, res) => {
   }
 };
 
-// Backend: handleSearchReviews
+
 const handleSearchReviews = async (req, res) => {
   try {
-    const { title } = req.query;
+    const { title, author } = req.query;
     let filter = {};
     
+    // Build the search filter based on provided parameters
     if (title) {
       filter.bookTitle = { $regex: title, $options: "i" };
+    } 
+    if (author) {
+      filter.bookAuthor = { $regex: author, $options: "i" };
+    }
+
+    // If no search parameters provided, return all reviews
+    if (Object.keys(filter).length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Please provide either title or author parameter" 
+      });
     }
 
     const reviews = await postModel
       .find(filter)
       .populate("reviewedBy", "name")
       .sort({ date: -1 })
-      .lean(); // Add .lean() for better performance
+      .lean();
 
-      // console.log(reviews)
     res.status(200).json({ 
       success: true, 
       reviews: reviews,
-      message: "Reviews fetched successfully"
+      count: reviews.length,
+      searchType: title ? "title" : "author",
+      searchQuery: title || author,
+      message: `Reviews fetched successfully by ${title ? "title" : "author"}`
     });
   } catch (error) {
     console.error("Error fetching reviews:", error);
     res.status(500).json({ 
       success: false, 
       message: "Server error",
-      error: error.message 
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 };

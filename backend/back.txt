@@ -9,7 +9,11 @@ search_button  -done
 reviews page working - but full Review button not working
 add-review page and button working 
 
-today -> by author name in search_button, carousel improve, footer newsetter improvement, likes button
+12-07
+today -> by author name in search_button -done---------
+, carousel improve -->> take top three of most star rated or like rated ->tomorrow
+, footer newsletter improvement,
+ likes button
 
 
 in carousel in hte full reveiw button ->> redirect it to post id of that post

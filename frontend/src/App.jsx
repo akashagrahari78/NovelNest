@@ -18,6 +18,7 @@ import Test from './pages/Test'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer, toast } from 'react-toastify';
+import Footer from './components/Footer'
 
 
 const App = () => {
@@ -38,8 +39,8 @@ const App = () => {
     <Route path='/profile' element = {<Profile/>} />
     <Route path='/test' element = {<Test/>} />
     <Route path='/search' element={<MainLayout><SearchReviews /></MainLayout>} />
-
    </Routes>
+   <Footer/>
 
    {/* <Footer/> */}
  </div>

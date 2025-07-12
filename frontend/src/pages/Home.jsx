@@ -15,7 +15,7 @@ const Home = () => {
       <UserTestimonial/>
       <StatsBar/>
       <Cta/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };

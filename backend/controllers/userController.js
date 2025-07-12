@@ -1,5 +1,7 @@
 const userModel = require("../models/userModel.js");
 
+const {sendEmail} = require("../utils/sendEmail.js")
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
@@ -91,4 +93,50 @@ const userRegister = async (req, res) => {
   }
 };
 
-module.exports = { userLogin, userRegister };
+const handleUserEmail = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide a valid email address"
+    });
+  }
+
+  try {
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #f59e0b;">Welcome to Our Newsletter! 🎉</h1>
+        <p>Thanks for subscribing with <strong>${email}</strong>.</p>
+        <p>You'll now receive our weekly savage book reviews.</p>
+        <p style="margin-top: 2rem;">
+          <a href="${process.env.BASE_URL}/unsubscribe?email=${encodeURIComponent(email)}" 
+             style="background: #f59e0b; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+            Unsubscribe
+          </a>
+        </p>
+      </div>
+    `;
+
+    await sendEmail(
+      email,
+      "Welcome to Our Newsletter!",
+      html
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Subscription confirmed! Check your email."
+    });
+  } catch (error) {
+    console.error("Subscription error:", error);
+    res.status(500).json({
+      success: false,
+      message: process.env.NODE_ENV === 'development'
+        ? error.message
+        : "Subscription failed. Please try again later."
+    });
+  }
+};
+
+module.exports = { userLogin, userRegister, handleUserEmail };
