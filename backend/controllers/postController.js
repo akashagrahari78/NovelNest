@@ -1,5 +1,6 @@
 const postModel = require("../models/postModel.js");
 const userModel = require("../models/userModel.js");
+const mongoose = require('mongoose')
 
 const handleUserReview = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ const handleUserReview = async (req, res) => {
       bookAuthor,
       rating,
       userReview,
-      reviewedBy: userId, // the userId from the token
+      reviewedBy: userId,
       date,
     });
 
@@ -36,18 +37,47 @@ const handleUserReview = async (req, res) => {
 
 const handleGetAllPost = async (req, res) => {
   try {
-const posts = await postModel
-  .find({})
-  .populate("reviewedBy", "name");
+    const posts = await postModel.find({}).populate("reviewedBy", "name");
 
-// console.log("Posts:", JSON.stringify(posts, null, 2));
+    // console.log("Posts:", JSON.stringify(posts, null, 2));
 
     res.json({ success: true, posts });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
-}
+};
 
+// Backend: handleSearchReviews
+const handleSearchReviews = async (req, res) => {
+  try {
+    const { title } = req.query;
+    let filter = {};
+    
+    if (title) {
+      filter.bookTitle = { $regex: title, $options: "i" };
+    }
 
-module.exports = { handleUserReview,handleGetAllPost};
+    const reviews = await postModel
+      .find(filter)
+      .populate("reviewedBy", "name")
+      .sort({ date: -1 })
+      .lean(); // Add .lean() for better performance
+
+      // console.log(reviews)
+    res.status(200).json({ 
+      success: true, 
+      reviews: reviews,
+      message: "Reviews fetched successfully"
+    });
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ 
+      success: false, 
+      message: "Server error",
+      error: error.message 
+    });
+  }
+};
+
+module.exports = { handleUserReview, handleGetAllPost, handleSearchReviews };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import "../index.css";
 
@@ -92,7 +92,7 @@ const Hero = () => {
           )}
         </div>
 
-        {/* Primary CTA */}
+        {/*  CTA  button*/}
         <div className="flex justify-center mb-8">
           <button 
             onClick={() => navigate('/trending')}  

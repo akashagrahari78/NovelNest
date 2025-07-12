@@ -9,7 +9,7 @@ const Book = () => {
 
   const book = books.find((item) => item.id.toString() === bookId);
 
-  if (!book) {
+  if (!book) {  
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <p className="text-lg">Review not found</p>

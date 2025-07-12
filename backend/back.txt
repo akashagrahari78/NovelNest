@@ -3,3 +3,16 @@ userModel -> reviews given by the user
 reviewModel -> reviewed by, 
 bookModel ->    
 postModel -> written by user, which user like the post
+
+
+search_button  -done
+reviews page working - but full Review button not working
+add-review page and button working 
+
+today -> by author name in search_button, carousel improve, footer newsetter improvement, likes button
+
+
+in carousel in hte full reveiw button ->> redirect it to post id of that post
+in the review page -> redirect full review button to complete post Id
+
+

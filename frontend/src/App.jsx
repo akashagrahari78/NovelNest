@@ -7,15 +7,17 @@ import Login from "./pages/Login"
 import Contact from "./pages/Contact"
 import Profile from './pages/Profile'
 import SignUp from './pages/SignUp'
-import { ToastContainer, toast } from 'react-toastify';
 import MainLayout from './pages/MainLayout'
 import ReviewsPage from './pages/ReviewsPage'
 import AddReviewPage from './pages/AddReviewPage'
+import Book from './pages/Book'
+import SearchReviews from './pages/SearchReviews'
 import Test from './pages/Test'
+
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Book from './pages/Book'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
     <Route path='signup' element = {<SignUp/>} />
     <Route path='/profile' element = {<Profile/>} />
     <Route path='/test' element = {<Test/>} />
+    <Route path='/search' element={<MainLayout><SearchReviews /></MainLayout>} />
+
    </Routes>
 
    {/* <Footer/> */}
