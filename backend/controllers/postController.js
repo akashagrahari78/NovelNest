@@ -1,6 +1,6 @@
 const postModel = require("../models/postModel.js");
 const userModel = require("../models/userModel.js");
-const mongoose = require('mongoose')
+ const mongoose = require('mongoose')
 
 const handleUserReview = async (req, res) => {
   try {
@@ -47,7 +47,6 @@ const handleGetAllPost = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 
 const handleSearchReviews = async (req, res) => {
   try {

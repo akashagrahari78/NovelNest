@@ -1,6 +1,6 @@
 const userModel = require("../models/userModel.js");
-
-const {sendEmail} = require("../utils/sendEmail.js")
+const messageModel = require("../models/messageModel.js");
+const { sendEmail } = require("../utils/sendEmail.js");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -21,7 +21,7 @@ const userLogin = async (req, res) => {
     if (isMatch) {
       const token = jwt.sign(
         {
-          userId: user._id.toString(), 
+          userId: user._id.toString(),
         },
         process.env.JWT_SECRET,
         { expiresIn: "3d" }
@@ -99,7 +99,7 @@ const handleUserEmail = async (req, res) => {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({
       success: false,
-      message: "Please provide a valid email address"
+      message: "Please provide a valid email address",
     });
   }
 
@@ -118,25 +118,52 @@ const handleUserEmail = async (req, res) => {
       </div>
     `;
 
-    await sendEmail(
-      email,
-      "Welcome to Our Newsletter!",
-      html
-    );
+    await sendEmail(email, "Welcome to Our Newsletter!", html);
 
     res.status(200).json({
       success: true,
-      message: "Subscription confirmed! Check your email."
+      message: "Subscription confirmed! Check your email.",
     });
   } catch (error) {
     console.error("Subscription error:", error);
     res.status(500).json({
       success: false,
-      message: process.env.NODE_ENV === 'development'
-        ? error.message
-        : "Subscription failed. Please try again later."
+      message:
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Subscription failed. Please try again later.",
     });
   }
 };
 
-module.exports = { userLogin, userRegister, handleUserEmail };
+const handleUserContact = async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    const userId = req.user.userId;
+
+    if (!userId) {
+      return res.status(400).json({ message: "user not found" });
+    }
+    const userContact = await messageModel.create({
+      name,
+      email,
+      message,
+    });
+
+    res.status(201).json({
+      success: true,
+      data: userContact,
+      message: "Request Send Successfully.",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = {
+  userLogin,
+  userRegister,
+  handleUserEmail,
+  handleUserContact,
+};

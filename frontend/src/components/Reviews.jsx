@@ -44,12 +44,12 @@ const Reviews = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <CarouselBox
-              bookId = {item.id}
+              bookId={item.id}
               bookAuthor={item.bookauthor}
               bookTitle={item.bookTitle}
               userReview={item.review}
-              rating ={item.rating}
-              date ={item.date}  
+              rating={item.rating}
+              date={item.date}
             />
           </motion.div>
         ))}

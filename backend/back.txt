@@ -12,11 +12,16 @@ add-review page and button working
 12-07
 today -> by author name in search_button -done---------
 , carousel improve -->> take top three of most star rated or like rated ->tomorrow
-, footer newsletter improvement,
+, footer newsletter improvement, --done--
  likes button
 
 
-in carousel in hte full reveiw button ->> redirect it to post id of that post
-in the review page -> redirect full review button to complete post Id
+13-07
+likes button
+contact-form
+full review redirect
+
+in carousel in the full reveiw button ->> redirect it to post id of that post "/post/:postId"
+in the review page -> redirect full review button to complete post Id ->"/post/:postId"
 
 

@@ -1,14 +1,48 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiTwitter, FiInstagram } from "react-icons/fi";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { userContext } from "../context/userContext";
 
 const ContactComponents = () => {
+  const  {token} = useContext(userContext);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const onChangeHandler = (e)=>{
+     const { name, value } = e.target;
+    setFormData((data) => ({ ...data, [name]: value }));
+  }
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    console.log("Form data is : ", formData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/user/contact",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
   return (
     <div className="min-h-screen bg-black text-white py-20 px-4">
       {/* Container */}
       <div className="max-w-4xl mx-auto mt-8">
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -18,7 +52,8 @@ const ContactComponents = () => {
             Got Something to Say?
           </h1>
           <p className="text-gray-400 font-bricolage max-w-2xl mx-auto">
-            Compliments, complaints, or collaboration ideas? We read every message.
+            Compliments, complaints, or collaboration ideas? We read every
+            message.
           </p>
         </motion.div>
 
@@ -29,48 +64,70 @@ const ContactComponents = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ 
+            whileHover={{
               y: -5,
-              boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)"
+              boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)",
             }}
             className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 backdrop-blur-sm transition-all duration-300 hover:border-gray-600"
           >
-            <h2 className="text-2xl font-quicksand font-bold mb-6">Send Us a Message</h2>
-             
+            <h2 className="text-2xl font-quicksand font-bold mb-6">
+              Send Us a Message
+            </h2>
 
-             {/* form field */}
-            <form className="space-y-6">
+            {/* form field */}
+            <form onSubmit={onSubmitHandler} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm text-gray-400 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm text-gray-400 mb-2"
+                >
                   Your Name (or alias)
                 </label>
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={onChangeHandler}
+                  required
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="Anonymous Reviewer"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm text-gray-400 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm text-gray-400 mb-2"
+                >
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={onChangeHandler}
+                  required
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm text-gray-400 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm text-gray-400 mb-2"
+                >
                   Your Message
                 </label>
                 <textarea
                   id="message"
                   rows={5}
+                  name="message"
+                  onChange={onChangeHandler}
+                  value={formData.message}
+                  required
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="Be brutally honest..."
                 ></textarea>
@@ -83,7 +140,6 @@ const ContactComponents = () => {
                 Send Message
               </button>
             </form>
-
           </motion.div>
 
           {/* Contact Info */}
@@ -94,21 +150,21 @@ const ContactComponents = () => {
             className="space-y-8"
           >
             <motion.div
-              whileHover={{ 
+              whileHover={{
                 y: -5,
-                boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)"
+                boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)",
               }}
               className="bg-gray-900/50 border border-gray-800 rounded-xl p-8 backdrop-blur-sm transition-all duration-300 hover:border-gray-600"
             >
               <h2 className="text-2xl font-bold mb-6">Other Ways to Connect</h2>
-              
+
               <div className="space-y-6">
                 {/* Email */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4 cursor-pointer"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1 }}
                     className="p-3 bg-gray-800 rounded-lg hover:bg-yellow-400/20 transition-colors duration-300"
                   >
@@ -116,17 +172,21 @@ const ContactComponents = () => {
                   </motion.div>
                   <div>
                     <h3 className="font-bold font-bricolage">Email</h3>
-                    <p className="text-gray-400 hover:text-white transition-colors duration-300">truth@novelnest.com</p>
-                    <p className="text-sm text-gray-500 mt-1">Response within 48 hours</p>
+                    <p className="text-gray-400 hover:text-white transition-colors duration-300">
+                      truth@novelnest.com
+                    </p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Response within 48 hours
+                    </p>
                   </div>
                 </motion.div>
 
                 {/* Twitter */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4 cursor-pointer"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1 }}
                     className="p-3 bg-gray-800 rounded-lg hover:bg-blue-400/20 transition-colors duration-300"
                   >
@@ -134,17 +194,21 @@ const ContactComponents = () => {
                   </motion.div>
                   <div>
                     <h3 className="font-bold font-bricolage">Twitter</h3>
-                    <p className="text-gray-400 hover:text-white transition-colors duration-300">@novelnest_roasts</p>
-                    <p className="text-sm text-gray-500 mt-1">For quick takes and drama</p>
+                    <p className="text-gray-400 hover:text-white transition-colors duration-300">
+                      @novelnest_roasts
+                    </p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      For quick takes and drama
+                    </p>
                   </div>
                 </motion.div>
 
                 {/* Instagram */}
-                <motion.div 
+                <motion.div
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4 cursor-pointer"
                 >
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.1 }}
                     className="p-3 bg-gray-800 rounded-lg hover:bg-pink-400/20 transition-colors duration-300"
                   >
@@ -152,8 +216,12 @@ const ContactComponents = () => {
                   </motion.div>
                   <div>
                     <h3 className="font-bold font-bricolage">Instagram</h3>
-                    <p className="text-gray-400 hover:text-white transition-colors duration-300">@novelnest</p>
-                    <p className="text-sm text-gray-500 mt-1">Book cover art and snippets</p>
+                    <p className="text-gray-400 hover:text-white transition-colors duration-300">
+                      @novelnest
+                    </p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Book cover art and snippets
+                    </p>
                   </div>
                 </motion.div>
               </div>
@@ -161,9 +229,9 @@ const ContactComponents = () => {
 
             {/* FAQ CTA */}
             <motion.div
-              whileHover={{ 
+              whileHover={{
                 y: -5,
-                boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)"
+                boxShadow: "0 10px 25px -5px rgba(255, 255, 255, 0.05)",
               }}
               className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 text-center backdrop-blur-sm transition-all duration-300 hover:border-gray-600"
             >
@@ -171,7 +239,7 @@ const ContactComponents = () => {
               <p className="text-gray-400 mb-4">
                 Check if your question is answered in our brutally honest FAQ
               </p>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="text-yellow-400 hover:text-yellow-300 underline"
@@ -184,6 +252,6 @@ const ContactComponents = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ContactComponents
+export default ContactComponents;

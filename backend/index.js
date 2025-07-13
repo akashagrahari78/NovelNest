@@ -28,7 +28,7 @@ app.use(cors({
 }));
 
 // Routes
-app.use("/api/user", userRouter)  // for login , signup , 
+app.use("/api/user", userRouter)  // for login , signup , contact page
 app.use("/api/user", postRouter) // for creating a post
 app.use("/api/post", allpostRouter) // for getting all reviews at "/reviews"
 app.use("/api", searchPostRouter)  // for search box query params

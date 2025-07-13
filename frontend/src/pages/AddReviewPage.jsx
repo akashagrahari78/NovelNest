@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 
 
 const AddReviewPage = () => {
-  const { getAllPost} = useContext(userContext);
 
-  const {token, setToken} = useContext(userContext);
+  const {token, getAllPost} = useContext(userContext);
   const [formData, setFormData] = useState({
     bookTitle: "",
     bookAuthor: "",
@@ -40,7 +39,6 @@ const AddReviewPage = () => {
   }
 )
 await getAllPost();
-
       console.log(response.data);
 
     } catch (error) {
