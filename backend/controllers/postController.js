@@ -1,6 +1,6 @@
 const postModel = require("../models/postModel.js");
 const userModel = require("../models/userModel.js");
- const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const handleUserReview = async (req, res) => {
   try {
@@ -52,20 +52,20 @@ const handleSearchReviews = async (req, res) => {
   try {
     const { title, author } = req.query;
     let filter = {};
-    
+
     // Build the search filter based on provided parameters
     if (title) {
       filter.bookTitle = { $regex: title, $options: "i" };
-    } 
+    }
     if (author) {
       filter.bookAuthor = { $regex: author, $options: "i" };
     }
 
     // If no search parameters provided, return all reviews
     if (Object.keys(filter).length === 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "Please provide either title or author parameter" 
+      return res.status(400).json({
+        success: false,
+        message: "Please provide either title or author parameter",
       });
     }
 
@@ -75,23 +75,66 @@ const handleSearchReviews = async (req, res) => {
       .sort({ date: -1 })
       .lean();
 
-    res.status(200).json({ 
-      success: true, 
+    res.status(200).json({
+      success: true,
       reviews: reviews,
       count: reviews.length,
       searchType: title ? "title" : "author",
       searchQuery: title || author,
-      message: `Reviews fetched successfully by ${title ? "title" : "author"}`
+      message: `Reviews fetched successfully by ${title ? "title" : "author"}`,
     });
   } catch (error) {
     console.error("Error fetching reviews:", error);
-    res.status(500).json({ 
-      success: false, 
+    res.status(500).json({
+      success: false,
       message: "Server error",
       error: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
     });
   }
 };
 
-module.exports = { handleUserReview, handleGetAllPost, handleSearchReviews };
+const handlePostLike = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.user.userId;
+
+    console.log("ids are", postId, userId);
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({ error: "Invalid post ID format" });
+    }
+
+    const post = await postModel.findById(postId);
+    console.log("post is ", post);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const userAlreadyLiked = post.likes.includes(userId);
+
+    const update = userAlreadyLiked
+      ? { $pull: { likes: userId } }
+      : { $addToSet: { likes: userId } };
+
+    const updatedPost = await postModel.findByIdAndUpdate(postId, update, {
+      new: true,
+    });
+
+    console.log('updated post', updatedPost)
+    res.json({
+      success: true,
+      isLiked: !userAlreadyLiked,
+      likesCount: updatedPost.likes.length,
+    });
+  } catch (error) {
+    console.error("Error in handlePostLike:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+module.exports = {
+  handleUserReview,
+  handleGetAllPost,
+  handleSearchReviews,
+  handlePostLike,
+};

@@ -5,8 +5,9 @@ import CarouselBox from "../components/CarouselBox.jsx";
 import { Link } from "react-router-dom";
 
 const Reviews = () => {
-  const { books } = useContext(userContext);
-
+  const { books, allPost } = useContext(userContext);
+  // const post = allPost.find((item)=> item._id.toString())
+  
   return (
     <div className="px-4 py-12">
       {/* Section Header */}

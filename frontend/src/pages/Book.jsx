@@ -4,12 +4,12 @@ import { userContext } from "../context/userContext.jsx";
 import { Star } from "lucide-react";
 
 const Book = () => {
-  const { bookId } = useParams();
-  const { books } = useContext(userContext);
+  const { postId } = useParams();
+  const { allPost } = useContext(userContext);
 
-  const book = books.find((item) => item.id.toString() === bookId);
+  const post = allPost.find((item) => item._id.toString() === postId);
 
-  if (!book) {  
+  if (!post) {  
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <p className="text-lg">Review not found</p>
@@ -23,8 +23,8 @@ const Book = () => {
       <Star
         key={i}
         size={22}
-        fill={i < book.rating ? "#facc15" : "none"}
-        stroke={i < book.rating ? "#facc15" : "white"}
+        fill={i < post.rating ? "#facc15" : "none"}
+        stroke={i < post.rating ? "#facc15" : "white"}
       />
     );
   }
@@ -41,26 +41,26 @@ const Book = () => {
 
         {/* Book Title */}
         <h1 className="text-3xl font-bold font-merriweather text-yellow-400">
-          {book.bookTitle}
+          {post.bookTitle}
         </h1>
 
         {/* Author */}
         <p className="text-lg text-gray-400 font-bricolage">
-          <span className="text-gray-500">Author:</span> {book.bookauthor}
+          <span className="text-gray-500">Author:</span> {post.bookAuthor}
         </p>
 
         {/* Rating */}
         <div className="flex items-center space-x-2">
           {stars}
           <span className="ml-2 text-sm text-gray-400">
-            {book.rating}/5
+            {post.rating}/5
           </span>
         </div>
 
         {/* Date */}
         <p className="text-sm font-bricolage text-gray-500">
           Reviewed on:{" "}
-          {new Date(book.date).toLocaleDateString("en-US", {
+          {new Date(post.date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric",
@@ -71,12 +71,12 @@ const Book = () => {
         <div className="pt-4 border-t border-gray-800">
           <h2 className="text-xl font-semibold text-white mb-2">Review</h2>
           <p className="text-gray-300 text-base font-bricolage  leading-relaxed">
-            {book.review}
+            {post.userReview}
           </p>
         </div>
 
         <div className= "font-bricolage text-sm text-gray-500 truncate max-w-[120px]">
-          @username
+          @{post.reviewedBy.name}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors")
+const mongoSanitize = require("express-mongo-sanitize");
 const connectDb = require("./config/mongodb.js")
 const userRouter = require("./routes/userRoute.js");
 const postRouter = require("./routes/postRoute.js");
@@ -27,9 +28,12 @@ app.use(cors({
   credentials: true
 }));
 
+// app.use(mongoSanitize());
+
+
 // Routes
-app.use("/api/user", userRouter)  // for login , signup , contact page
-app.use("/api/user", postRouter) // for creating a post
+app.use("/api/user", userRouter)  // for login , signup , contact page, newsletter email
+app.use("/api/user", postRouter) // for creating a post, like a post, 
 app.use("/api/post", allpostRouter) // for getting all reviews at "/reviews"
 app.use("/api", searchPostRouter)  // for search box query params
 

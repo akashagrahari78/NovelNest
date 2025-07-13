@@ -7,7 +7,7 @@ import { userContext } from "../context/userContext.jsx";
 
 const ReviewsPage = () => {
 
-  const { books, allPost } = useContext(userContext);
+  const {  allPost } = useContext(userContext);
 
   return (
     <div className="max-w-2xl mx-auto p-4 mt-28">
@@ -39,9 +39,9 @@ const ReviewsPage = () => {
 
       {/* Reviews list */}
       <div className="space-y-4">
-        {allPost.map((item, index) => (
+        {allPost.map((item) => (
           <ReviewCard
-            key={index}
+            key={item._id}
             postId={item._id}
             bookTitle={item.bookTitle}
             bookAuthor={item.bookAuthor}
@@ -49,6 +49,9 @@ const ReviewsPage = () => {
             rating={item.rating}
             date={item.date}  
             reviewedBy ={item.reviewedBy}
+            initialLikes={item.likes?.length || 0}
+            // initialIsLiked={item.likes?.includes(currentUserId) || false}
+            initialIsLiked = {false}
           />
         ))}
       </div>
