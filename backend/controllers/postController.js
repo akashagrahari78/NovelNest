@@ -99,28 +99,31 @@ const handlePostLike = async (req, res) => {
     const { postId } = req.params;
     const userId = req.user.userId;
 
-    console.log("ids are", postId, userId);
     if (!mongoose.Types.ObjectId.isValid(postId)) {
       return res.status(400).json({ error: "Invalid post ID format" });
     }
 
     const post = await postModel.findById(postId);
-    console.log("post is ", post);
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
 
-    const userAlreadyLiked = post.likes.includes(userId);
+    // Check if user already liked the post
+    const userIndex = post.likes.indexOf(userId);
+    const userAlreadyLiked = userIndex !== -1;
 
-    const update = userAlreadyLiked
-      ? { $pull: { likes: userId } }
-      : { $addToSet: { likes: userId } };
+    // Update based on current state
+    if (userAlreadyLiked) {
+      //unlike
+      post.likes.splice(userIndex, 1);
+    } else {
+      //like
+      post.likes.push(userId);
+    }
 
-    const updatedPost = await postModel.findByIdAndUpdate(postId, update, {
-      new: true,
-    });
+    // Save the updated post
+    const updatedPost = await post.save();
 
-    console.log('updated post', updatedPost)
     res.json({
       success: true,
       isLiked: !userAlreadyLiked,
@@ -132,9 +135,34 @@ const handlePostLike = async (req, res) => {
   }
 };
 
+const handleGetLikeStatus = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.user.userId; 
+
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({ error: "Invalid post ID" });
+    }
+
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const isLiked = post.likes.includes(userId);
+    const likesCount = post.likes.length;
+
+    res.json({ isLiked, likesCount });
+  } catch (error) {
+    console.error("Error in getLikeStatus:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   handleUserReview,
   handleGetAllPost,
   handleSearchReviews,
   handlePostLike,
+  handleGetLikeStatus
 };

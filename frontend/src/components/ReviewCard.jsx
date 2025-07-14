@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
-import {
-  FiBookOpen,
-  FiUser,
-  FiCalendar,
-  FiStar,
-  FiThumbsUp,
-} from "react-icons/fi";
+import {FiBookOpen,FiUser,FiCalendar,FiStar,FiThumbsUp} from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useContext, useState, useMemo, useCallback } from "react";
+import { useContext, useState,useEffect, useMemo, useCallback } from "react";
 import { userContext } from "../context/userContext";
 import axios from "axios";
 
@@ -18,9 +12,9 @@ const ReviewCard = ({
   userReview,
   rating,
   date,
-  reviewedBy = {},
-  initialLikes = 0,
-  initialIsLiked = false,
+  reviewedBy ,
+  initialLikes ,
+  initialIsLiked 
 }) => {
   const { token } = useContext(userContext);
   const [likes, setLikes] = useState(initialLikes);
@@ -35,34 +29,59 @@ const ReviewCard = ({
     return new Date(date).toLocaleDateString("en-US", options);
   }, [date]);
 
-  const handleLike = useCallback(async () => {
-    const optimisticIsLiked = !isLiked;
-    const optimisticLikes = optimisticIsLiked ? likes + 1 : likes - 1;
-
-    setIsLiked(optimisticIsLiked);
-    setLikes(optimisticLikes);
-
+useEffect(() => {
+  const fetchLikeStatus = async () => {
     try {
-      const response = await axios.put(
-        `http://localhost:3000/api/user/${postId}/like`,
-        {},
+      const response = await axios.get(
+        `http://localhost:3000/api/user/${postId}/like-status`,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      const { isLiked: serverIsLiked, likesCount } = response.data;
-      setIsLiked(serverIsLiked);
+      const { isLiked, likesCount } = response.data;
+      setIsLiked(isLiked);
       setLikes(likesCount);
     } catch (error) {
-      console.error("Error updating like:", error);
-      setIsLiked(!optimisticIsLiked);
-      setLikes(optimisticIsLiked ? likes - 1 : likes + 1);
+      console.error("Failed to fetch like status", error);
     }
-  }, [isLiked, likes, postId, token]);
+  };
+
+  fetchLikeStatus();
+}, [postId, token]);
+
+
+ const handleLike = async () => {
+  const optimisticIsLiked = !isLiked;
+  const optimisticLikes = optimisticIsLiked ? likes + 1 : likes - 1;
+
+  setIsLiked(optimisticIsLiked);
+  setLikes(optimisticLikes);
+
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/api/user/${postId}/like`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const { isLiked, likesCount } = response.data;
+    setLikes(likesCount);
+    setIsLiked(isLiked);
+  } catch (error) {
+    console.error("Error updating like:", error);
+     
+    setIsLiked(!optimisticIsLiked);
+    setLikes(optimisticIsLiked ? likes - 1 : likes + 1);
+  }
+};
 
   const reviewerInitial = reviewedBy?.name?.charAt(0)?.toUpperCase() || "U";
 

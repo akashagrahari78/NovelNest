@@ -2,12 +2,22 @@ import { motion } from "framer-motion";
 import ReviewCard from "../components/ReviewCard.jsx";
 import { useContext } from "react";
 import { userContext } from "../context/userContext.jsx";
-
-
+import { jwtDecode } from 'jwt-decode';  
 
 const ReviewsPage = () => {
+  const { token, allPost } = useContext(userContext);
 
-  const {  allPost } = useContext(userContext);
+  let userId = null;
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);  
+      userId = decoded.userId;
+      console.log("User ID:", userId);
+    } catch (error) {
+      console.error("Invalid token:", error);
+    }
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-4 mt-28">
@@ -50,8 +60,7 @@ const ReviewsPage = () => {
             date={item.date}  
             reviewedBy ={item.reviewedBy}
             initialLikes={item.likes?.length || 0}
-            // initialIsLiked={item.likes?.includes(currentUserId) || false}
-            initialIsLiked = {false}
+            initialIsLiked={item.likes?.includes(userId) || false}
           />
         ))}
       </div>

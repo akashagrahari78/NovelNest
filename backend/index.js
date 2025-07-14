@@ -33,7 +33,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/user", userRouter)  // for login , signup , contact page, newsletter email
-app.use("/api/user", postRouter) // for creating a post, like a post, 
+app.use("/api/user", postRouter) // for creating a post, like a post, getting like status
 app.use("/api/post", allpostRouter) // for getting all reviews at "/reviews"
 app.use("/api", searchPostRouter)  // for search box query params
 
