@@ -38,6 +38,7 @@ const AddReviewPage = () => {
     },
   }
 )
+toast.success(response.data.message)
 await getAllPost();
       console.log(response.data);
 
