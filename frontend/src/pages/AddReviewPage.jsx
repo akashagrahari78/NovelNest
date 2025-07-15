@@ -5,10 +5,8 @@ import { useContext } from "react";
 import { userContext } from "../context/userContext";
 import { toast } from "react-toastify";
 
-
 const AddReviewPage = () => {
-
-  const {token, getAllPost} = useContext(userContext);
+  const { token, getAllPost } = useContext(userContext);
   const [formData, setFormData] = useState({
     bookTitle: "",
     bookAuthor: "",
@@ -29,19 +27,18 @@ const AddReviewPage = () => {
 
     try {
       const response = await axios.post(
-  `http://localhost:3000/api/user/add-review`,
-  formData,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  }
-)
-toast.success(response.data.message)
-await getAllPost();
+        `http://localhost:3000/api/user/add-review`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      toast.success(response.data.message);
+      await getAllPost();
       console.log(response.data);
-
     } catch (error) {
       console.log(error);
       toast.error(error.message);

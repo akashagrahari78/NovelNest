@@ -9,7 +9,7 @@ const Login = () => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {backendUrl, token, setToken, navigate} = useContext(userContext);
+  const {backendUrl,  setToken, navigate} = useContext(userContext);
 
     const onSubmitHandler = async (e) => {
     e.preventDefault();

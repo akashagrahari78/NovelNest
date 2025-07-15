@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const CarouselBox = ({bookId, bookAuthor, bookTitle, userReview, rating, date }) => {
+const CarouselBox = ({postId, bookAuthor, bookTitle, userReview, rating, date, reviewedBy }) => {
   return (
     <motion.div
       whileHover={{
@@ -43,18 +43,17 @@ const CarouselBox = ({bookId, bookAuthor, bookTitle, userReview, rating, date })
         </div>
 
         {/* Review Excerpt */}
-        <p className="text-gray-300 mb-4 flex-grow line-clamp-3">
-          <span className="font-medium text-gray-400 font-bricolage">Review:</span>
-          <span className="font-bricolage"> {userReview}</span>
-        </p>
-
+       <p className="text-gray-300 mb-4 flex-grow line-clamp-2">
+         <span className="font-medium text-gray-400 font-bricolage">Review:</span>
+         <span className="font-bricolage"> {userReview}</span>
+       </p>
         {/* Footer */}
         <div className="flex items-center justify-between border-t border-gray-800 pt-4">
           <span className="text-sm text-gray-500 truncate max-w-[120px]">
-            {/* @{bookAuthor.split(" ").join("")} */}
-            @username
+            @{reviewedBy.name || "Unknown"}
+             
           </span>
-          <Link to={`/book/${bookId}`}>
+          <Link to={`/post/${postId}`}>
             <button className="bg-white text-black hover:bg-gray-200 text-sm px-4 py-2 rounded-xl font-medium transition-colors duration-200">
               Full Review →
             </button>

@@ -1,5 +1,6 @@
 import React from 'react'
 import "./index.css"
+import ScrollToTop from './components/ScrollToTop'
 import { Route,Routes } from 'react-router-dom'
 import Home from "./pages/Home"
 import About from "./pages/About"
@@ -23,8 +24,8 @@ import Footer from './components/Footer'
 
 const App = () => {
   return (
- <div  >
-  
+  <>
+  <ScrollToTop />
   <ToastContainer/>
    <Routes>
     <Route path='/' element = {<MainLayout> <Home/> </MainLayout>  } />
@@ -43,7 +44,7 @@ const App = () => {
    <Footer/>
 
    {/* <Footer/> */}
- </div>
+ </>
 
   )
 }

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
+import { Link, Element, scroller } from 'react-scroll';
 import "../index.css";
+import { delay } from 'framer-motion';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const Hero = () => {
     if (searchQuery.trim()) {
       navigate(`/search?${searchBy}=${encodeURIComponent(searchQuery)}`);
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 text-center">
@@ -95,7 +97,12 @@ const Hero = () => {
         {/*  CTA  button*/}
         <div className="flex justify-center mb-8">
           <button 
-            onClick={() => navigate('/trending')}  
+            onClick={() =>{ scroller.scrollTo("reviewSection"), {
+              duration: 2000,
+              delay: 0,
+              smooth: "easeInOutQuart",
+             
+            }}}  
             className="px-8 py-3 bg-white text-black font-bold rounded-full font-merriweather shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition"
           >
             Explore Curated Picks

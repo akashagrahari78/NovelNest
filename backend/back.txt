@@ -22,13 +22,17 @@ full review redirect -- done for review page
 for carousel page take top 6 post from "most helpful" means top 6 most liked post and display them and,  in Full review button redirect to "/post/:postId"
 
 14-07
-make likes and most rated post as global by context api and add the higest rated and mostHelpful button 
-in the most helpful, find the top post with the most likes
+make likes and most rated post as global by context api and add the higest rated and mostHelpful button  --done--
+in the most helpful, find the top post with the most likes --done--
 
 
-like button color disapper when I already liked the post 
+like button color disapper when I already liked the post --done--
 
 in carousel in the full reveiw button ->> redirect it to post id of that post "/post/:postId"
 in the review page -> redirect full review button to complete post Id ->"/post/:postId"
 
+remaining__ 
+1 logout button --done--
+2 join the rebillion , read the drama button in about page --done--
 
+auth at Footer, add-reveiw, 

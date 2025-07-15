@@ -152,13 +152,16 @@ const About = () => {
             Ready to <span className="text-yellow-400">Burn Some Books</span>?
           </h2>
           <div className="flex  sm:flex-row justify-center gap-8 mt-8">
-            <Link>
+            <Link to={'/signup'}>
               <button className="bg-white font-bricolage text-black font-semibold px-5 py-3 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition ">
                 Join the Rebellion
               </button>
             </Link>
+
             <button className="bg-white font-bricolage text-black font-semibold px-4 py-1.5 rounded-xl shadow-[0_0_12px_rgba(255,255,255,0.5)] hover:bg-yellow-400 transition ">
+            <Link to = {'/reviews'}>
               Read the Drama
+            </Link>
             </button>
           </div>
         </div>
