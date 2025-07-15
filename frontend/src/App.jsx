@@ -6,14 +6,14 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Login from "./pages/Login"
 import Contact from "./pages/Contact"
-import Profile from './pages/Profile'
+// import Profile from './pages/Profile'
 import SignUp from './pages/SignUp'
 import MainLayout from './pages/MainLayout'
 import ReviewsPage from './pages/ReviewsPage'
 import AddReviewPage from './pages/AddReviewPage'
 import Book from './pages/Book'
-import SearchReviews from './pages/SearchReviews'
-import Test from './pages/Test'
+// import SearchReviews from './pages/SearchReviews'
+// import Test from './pages/Test'
 
 
 import "slick-carousel/slick/slick.css";
@@ -37,10 +37,7 @@ const App = () => {
     <Route path='/contact' element = {<MainLayout>  <Contact/> </MainLayout> } />
     <Route path='/login' element = {<Login/>} />
     <Route path='signup' element = {<SignUp/>} />
-    <Route path='/profile' element = {<Profile/>} />
-    <Route path='/test' element = {<Test/>} />
-    <Route path='/search' element={<MainLayout><SearchReviews /></MainLayout>} />
-   </Routes>
+    </Routes>
    <Footer/>
 
    {/* <Footer/> */}

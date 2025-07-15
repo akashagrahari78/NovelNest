@@ -6,7 +6,7 @@ import axios from "axios";
 import { userContext } from "../context/userContext";
 
 const ContactComponents = () => {
-  const  {token} = useContext(userContext);
+  const  {token, backendUrl} = useContext(userContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +23,8 @@ const ContactComponents = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/contact",
+        // "http://localhost:3000/api/user/contact",
+        `${backendUrl}/api/user/contact`,
         formData,
         {
           headers: {
@@ -32,6 +33,7 @@ const ContactComponents = () => {
           },
         }
       );
+      toast.success(response.data.message)
     } catch (error) {
       console.log(error);
       toast.error(error.message);

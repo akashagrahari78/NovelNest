@@ -2,7 +2,7 @@ import React from "react";
 import { assets } from "../assets/assets";
 import { Link , useNavigate} from "react-router-dom";
 import { toast } from 'react-toastify';
-import axios from "axios";
+
 
 const Navbar = () => {
 

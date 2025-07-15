@@ -50,10 +50,11 @@ export const UserContextProvider = (props) => {
 
   useEffect(() => {
     console.log("Updated allPost:", allPost);  
+    console.log("bacckend url is : ", backendUrl)
   }, [allPost]);
 
   const value = {
-    navigate,
+    navigate,backendUrl,
     token,
     setToken,
     userReviews,

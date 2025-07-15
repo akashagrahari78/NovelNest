@@ -16,7 +16,7 @@ const ReviewCard = ({
   initialLikes ,
   initialIsLiked 
 }) => {
-  const { token } = useContext(userContext);
+  const { token, backendUrl } = useContext(userContext);
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
@@ -33,7 +33,8 @@ useEffect(() => {
   const fetchLikeStatus = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/user/${postId}/like-status`,
+        // `http://localhost:3000/api/user/${postId}/like-status`,
+        `${backendUrl}/api/user/${postId}/like-status`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
